@@ -12,7 +12,7 @@ LABEL \
     org.opencontainers.image.documentation="https://github.com/trampgeek/jobeinabox" \
     org.opencontainers.image.source="https://github.com/trampgeek/jobeinabox"
 
-ARG TZ=Pacific/Auckland
+ARG TZ=Asia/Seoul
 # Set up the (apache) environment variables
 ENV APACHE_RUN_USER=www-data
 ENV APACHE_RUN_GROUP=www-data
@@ -25,6 +25,12 @@ ENV LANG=C.UTF-8
 COPY 000-jobe.conf /
 # Copy test script
 COPY container-test.sh /
+
+COPY setup_current.x /
+
+RUN apt update && apt install -y curl &&\
+    curl -fsSL https://deb.nodesource.com/setup_23.x -o nodesource_setup.sh &&\
+    bash nodesource_setup.sh
 
 # Mount secrets
 # Set timezone

@@ -1,0 +1,5 @@
+services:
+  jobe:
+    image: incodingplus/jobe:latest
+    ports:
+      - "8080:80"

@@ -1,0 +1,3 @@
+#!/bin/bash
+docker buildx build . -t ghcr.io/incodingplus/jobeinabox --secret id=api_keys,src=api_keys
+

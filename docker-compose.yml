@@ -1,5 +1,6 @@
 services:
   jobe:
-    image: incodingplus/jobe:latest
+    image: ghcr.io/incodingplus/jobeinabox:latest
+    # image: trampgeek/jobeinabox:latest
     ports:
       - "8080:80"

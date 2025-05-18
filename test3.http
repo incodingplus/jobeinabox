@@ -1,0 +1,11 @@
+POST http://localhost:8080/jobe/index.php/restapi/runs
+Content-Type: application/json
+X-API-KEY: gQhxy1g8B0ZTVjYfWDjpPNgEoAD6iEm6CdKoDbfC9bZPqBpRvNw_r_f10rcfQU3skRZscSF2bflwlFK0i9DvOg==
+
+{
+    "run_spec":{
+        "language_id":"cpp",
+        "sourcefilename":"script.cpp",
+        "sourcecode":"#include <iostream>\n\nconsteval int square(int x) {\n    return x * x;\n}\n\nint main() {\n    constexpr int result = square(5);\n    std::cout << \"result: \" << result << std::endl;\n    return 0;\n}"
+    }
+}

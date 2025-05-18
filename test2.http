@@ -4,8 +4,9 @@ X-API-KEY: gQhxy1g8B0ZTVjYfWDjpPNgEoAD6iEm6CdKoDbfC9bZPqBpRvNw_r_f10rcfQU3skRZsc
 
 {
     "run_spec":{
-        "language_id":"python3",
-        "sourcefilename":"index.py",
-        "sourcecode":"def sol():\n\tprint(30)\nsol()"
+        "language_id":"nodejs",
+        "sourcefilename":"script.js",
+        "sourcecode":"console.log(30)",
+        "memorylimit":4000
     }
 }

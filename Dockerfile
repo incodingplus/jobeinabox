@@ -26,12 +26,6 @@ COPY 000-jobe.conf /
 # Copy test script
 COPY container-test.sh /
 
-COPY setup_current.x /
-
-RUN apt update && apt install -y curl &&\
-    curl -fsSL https://deb.nodesource.com/setup_23.x -o nodesource_setup.sh &&\
-    bash nodesource_setup.sh
-
 # Mount secrets
 # Set timezone
 # Install extra packages
@@ -46,16 +40,16 @@ RUN --mount=type=secret,id=api_keys \
     export API_KEYS=`cat /run/secrets/api_keys | tr '\n' ' '` && \
     ln -snf /usr/share/zoneinfo/"$TZ" /etc/localtime && \
     echo "$TZ" > /etc/timezone && \
-    apt-get update && \
-    apt-get --no-install-recommends install -yq \
+    apt update && \
+    apt --no-install-recommends install -yq \
         acl \
         apache2 \
         build-essential \
         fp-compiler \
         git \
         libapache2-mod-php \
+        curl \
         nano \
-        nodejs \
         octave \
         default-jdk \
         php \
@@ -70,6 +64,8 @@ RUN --mount=type=secret,id=api_keys \
         sudo \
         tzdata \
         unzip && \
+    curl -fsSL https://bun.sh/install | bash && \
+    mv /root/.bun/bin/bun /usr/local/bin/bun && \
     pylint --reports=no --score=n --generate-rcfile > /etc/pylintrc && \
     ln -sf /proc/self/fd/1 /var/log/apache2/access.log && \
     ln -sf /proc/self/fd/1 /var/log/apache2/error.log && \
@@ -82,7 +78,7 @@ RUN --mount=type=secret,id=api_keys \
     mkdir -p /var/crash && \
     chmod 777 /var/crash && \
     echo '<!DOCTYPE html><html lang="en"><title>Jobe</title><h1>Jobe</h1></html>' > /var/www/html/index.html && \
-    git clone https://github.com/trampgeek/jobe.git /var/www/html/jobe && \
+    git clone https://github.com/incodingplus/jobe.git /var/www/html/jobe && \
     apache2ctl start && \
     cd /var/www/html/jobe && \
     if [ ! -z "${API_KEYS}" ]; then \
@@ -91,8 +87,8 @@ RUN --mount=type=secret,id=api_keys \
     ; fi && \
     /usr/bin/python3 /var/www/html/jobe/install --max_uid=500 && \
     chown -R ${APACHE_RUN_USER}:${APACHE_RUN_GROUP} /var/www/html && \
-    apt-get -y autoremove --purge && \
-    apt-get -y clean && \
+    apt -y autoremove --purge && \
+    apt -y clean && \
     rm -rf /var/lib/apt/lists/*
 
 # Expose apache

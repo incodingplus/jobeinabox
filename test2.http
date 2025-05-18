@@ -4,9 +4,9 @@ X-API-KEY: gQhxy1g8B0ZTVjYfWDjpPNgEoAD6iEm6CdKoDbfC9bZPqBpRvNw_r_f10rcfQU3skRZsc
 
 {
     "run_spec":{
-        "language_id":"nodejs",
-        "sourcefilename":"script.js",
-        "sourcecode":"console.log(30)",
-        "memorylimit":4000
+        "language_id":"bun",
+        "sourcefilename":"script.ts",
+        "input":"30\n",
+        "sourcecode":"let a:number = Number(prompt(''));\nconsole.log(a + 40)"
     }
 }

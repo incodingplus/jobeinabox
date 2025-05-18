@@ -45,13 +45,13 @@ RUN --mount=type=secret,id=api_keys \
         acl \
         apache2 \
         build-essential \
-        fp-compiler \
+        # fp-compiler \
         git \
         libapache2-mod-php \
         curl \
         nano \
-        octave \
-        default-jdk \
+        # octave \
+        # default-jdk \
         php \
         php-cli \
         php-mbstring \
@@ -66,6 +66,7 @@ RUN --mount=type=secret,id=api_keys \
         unzip && \
     curl -fsSL https://bun.sh/install | bash && \
     mv /root/.bun/bin/bun /usr/local/bin/bun && \
+    chmod 755 /usr/local/bin/bun && \
     pylint --reports=no --score=n --generate-rcfile > /etc/pylintrc && \
     ln -sf /proc/self/fd/1 /var/log/apache2/access.log && \
     ln -sf /proc/self/fd/1 /var/log/apache2/error.log && \

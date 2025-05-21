@@ -2,5 +2,6 @@ services:
   jobe:
     image: ghcr.io/incodingplus/jobeinabox:latest
     # image: trampgeek/jobeinabox:latest
+    privileged: true
     ports:
       - "8080:80"

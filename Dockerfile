@@ -52,6 +52,7 @@ RUN --mount=type=secret,id=api_keys \
         nano \
         # octave \
         # default-jdk \
+        libcgroup-dev \
         php \
         php-cli \
         php-mbstring \
@@ -79,7 +80,7 @@ RUN --mount=type=secret,id=api_keys \
     mkdir -p /var/crash && \
     chmod 777 /var/crash && \
     echo '<!DOCTYPE html><html lang="en"><title>Jobe</title><h1>Jobe</h1></html>' > /var/www/html/index.html && \
-    git clone https://github.com/incodingplus/jobe.git /var/www/html/jobe && \
+    git clone --branch master --single-branch --depth 1 https://github.com/incodingplus/jobe.git /var/www/html/jobe && \
     apache2ctl start && \
     cd /var/www/html/jobe && \
     if [ ! -z "${API_KEYS}" ]; then \
